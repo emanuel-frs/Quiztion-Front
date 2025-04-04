@@ -8,7 +8,7 @@ import { SidebarProvider } from './context/SidebarContext';
 import { useEffect } from 'react';
 
 export default function App() {
-  useEffect(() => {
+  //useEffect(() => {
     useFonts({
       'Baloo2-Regular': require('./assets/fonts/Baloo2-Regular.ttf'),
       'Baloo2-Medium': require('./assets/fonts/Baloo2-Medium.ttf'),
@@ -16,7 +16,7 @@ export default function App() {
       'Baloo2-Bold': require('./assets/fonts/Baloo2-Bold.ttf'),
       'Baloo2-ExtraBold': require('./assets/fonts/Baloo2-ExtraBold.ttf'),
     });
-  },[])
+  //},[])
 
   return (
     <SidebarProvider>
