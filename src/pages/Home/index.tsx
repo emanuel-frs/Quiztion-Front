@@ -1,4 +1,3 @@
-// screens/Home.tsx
 import React, { useState } from "react";
 import { Text, Pressable, Image, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
@@ -9,8 +8,7 @@ import Button from "../../components/Button/Button";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 export function Home() {
-  const [registrar, setRegistrar] = useState<boolean>(false);
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode } = useTheme();
   
   const book = require('../../assets/book.png');
 
@@ -19,10 +17,6 @@ export function Home() {
     : require('../../assets/backgroundWhite.png');
 
   const backgroundColor = isDarkMode ? '#202E38' : '#FFFFFF';
-
-  const handleRegistrar = () => {
-    setRegistrar(!registrar);
-  };
 
   return (
     <>
