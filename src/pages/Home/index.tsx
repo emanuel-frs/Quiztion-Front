@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, Pressable, Image, View } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { styles } from "./styles";
@@ -7,7 +7,7 @@ import Background from "../../components/Background/Background";
 import Button from "../../components/Button/Button";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 
-export function Home() {
+export default function Home() {
   const { isDarkMode } = useTheme();
   
   const book = require('../../assets/book.png');
