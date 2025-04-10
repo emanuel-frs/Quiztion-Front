@@ -8,10 +8,6 @@ import Logo from "../../components/Logo/Logo";
 
 export default function Login () {
     const [registrar, setRegistrar] = useState<boolean>(false);
-    const [dataNascimento, setDataNascimento] = useState<string>("");
-    const [dataNascimentoFormatada, setDataNascimentoFormatada] = useState<string>("");
-    const [telefone, setTelefone] = useState<string>("");
-    const [cpf, setCpf] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
