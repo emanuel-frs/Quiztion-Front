@@ -1,52 +1,144 @@
-import { Pressable, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Pressable, Animated, View } from "react-native";
 import { styles } from "./styles";
 import { useSidebar } from "../../context/SidebarContext";
 import ButtonHeader from "../ButtonSidebar/ButtonSidebar";
 import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../../context/AuthContext";
+import { Text } from "react-native";
 
 export function Sidebar() {
     const { sidebar, setSidebar } = useSidebar();
     const { isDarkMode, toggleTheme } = useTheme();
+    const { logout } = useAuth();
 
-    if (!sidebar) return null;
+    const slideAnim = useRef(new Animated.Value(-300)).current;
+    const fadeAnim = useRef(new Animated.Value(0)).current;
+
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        if (sidebar) {
+            setIsVisible(true);
+            Animated.parallel([
+                Animated.timing(slideAnim, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: false,
+                }),
+                Animated.timing(fadeAnim, {
+                    toValue: 0.5,
+                    duration: 300,
+                    useNativeDriver: false,
+                }),
+            ]).start();
+        } else {
+            Animated.parallel([
+                Animated.timing(slideAnim, {
+                    toValue: -300,
+                    duration: 300,
+                    useNativeDriver: false,
+                }),
+                Animated.timing(fadeAnim, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: false,
+                }),
+            ]).start(() => {
+                setIsVisible(false);
+            });
+        }
+    }, [sidebar]);
+
+    if (!isVisible) return null;
 
     return (
         <>
-            <Pressable style={styles.background} onPress={() => setSidebar(false)} />
-            <View style={[isDarkMode ? styles.containerDark : styles.containerWhite, styles.container]}>
+            <Animated.View
+                style={[
+                    styles.background,
+                    { opacity: fadeAnim }
+                ]}
+            >
+                <Pressable style={{ flex: 1 }} onPress={() => setSidebar(false)} />
+            </Animated.View>
+
+            <Animated.View
+                style={[
+                    isDarkMode ? styles.containerDark : styles.containerWhite,
+                    styles.container,
+                    { left: slideAnim }
+                ]}
+            >
                 <View>
+                    <View style={[
+                        isDarkMode ? styles.perfilDark : styles.perfilWhite,
+                        styles.perfil
+                    ]}>
+                        <View style={styles.imgPerfil}></View>
+                        <Text style={[
+                            isDarkMode ? styles.txtSidebarNomeDark : styles.txtSidebarDark,
+                            styles.txtSidebarNome
+                        ]}>
+                            Nome do Usuário
+                        </Text>
+                    </View>
                     <ButtonHeader
                         title="INÍCIO"
                         onPress={() => {}}
-                        style={[isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite, styles.btnSidebar]}
-                        textStyle={[isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite, styles.txtSidebar]}
+                        style={[
+                            isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite,
+                            styles.btnSidebar
+                        ]}
+                        textStyle={[
+                            isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite,
+                            styles.txtSidebar
+                        ]}
                     />
                     <ButtonHeader
                         title="RANKING"
                         onPress={() => {}}
-                        style={[isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite, styles.btnSidebar]}
-                        textStyle={[isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite, styles.txtSidebar]}
+                        style={[
+                            isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite,
+                            styles.btnSidebar
+                        ]}
+                        textStyle={[
+                            isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite,
+                            styles.txtSidebar
+                        ]}
                     />
                     <ButtonHeader
                         title="MUDAR TEMA"
                         onPress={toggleTheme}
-                        style={[isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite, styles.btnSidebar]}
-                        textStyle={[isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite, styles.txtSidebar]}
+                        style={[
+                            isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite,
+                            styles.btnSidebar
+                        ]}
+                        textStyle={[
+                            isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite,
+                            styles.txtSidebar
+                        ]}
                     />
                     <ButtonHeader
                         title="SOBRE NÓS"
                         onPress={() => {}}
-                        style={[isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite, styles.btnSidebar]}
-                        textStyle={[isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite, styles.txtSidebar]}
+                        style={[
+                            isDarkMode ? styles.btnSidebarDark : styles.btnSidebarWhite,
+                            styles.btnSidebar
+                        ]}
+                        textStyle={[
+                            isDarkMode ? styles.txtSidebarDark : styles.txtSidebarWhite,
+                            styles.txtSidebar
+                        ]}
                     />
                 </View>
                 <ButtonHeader
                     title="SAIR DA CONTA"
-                    onPress={() => {}}
+                    onPress={logout}
                     style={styles.btnSair}
                     textStyle={styles.txtSair}
                 />
-            </View>
+            </Animated.View>
         </>
     );
 }

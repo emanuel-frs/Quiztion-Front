@@ -5,6 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 import ThemeToggleButton from "../../components/ThemeChange/ThemeChange";
 import Button from "../../components/Button/Button";
 import Logo from "../../components/Logo/Logo";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login () {
     const [registrar, setRegistrar] = useState<boolean>(false);
@@ -12,6 +13,7 @@ export default function Login () {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const { isDarkMode } = useTheme();
+    const { login } = useAuth();
 
     const backgroundImage = isDarkMode 
     ? require('../../assets/backgroundDark.png') 
@@ -56,7 +58,7 @@ export default function Login () {
                             <Button
                                 title="REGISTRAR"
                                 onPress={() => {}}
-                                style={styles.btnRegistrar}
+                                style={[styles.btnRegistrar, styles.btnRegistrarCima]}
                                 textStyle={styles.txtEntrar}
                             />
                             <Button
@@ -83,7 +85,7 @@ export default function Login () {
                         <View style={styles.botoes}>
                             <Button
                                 title="ENTRAR"
-                                onPress={() => {}}
+                                onPress={login}
                                 style={styles.btnEntrar}
                                 textStyle={styles.txtEntrar}
                             />

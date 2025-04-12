@@ -63,8 +63,10 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: 'center',
     },
+    btnRegistrarCima: {
+        marginBottom: 20,
+    },
     btnCancelar: {
-        marginTop: 20,
         borderWidth: 4,
         borderBottomWidth: 10,
         borderColor: '#8D8D8D',

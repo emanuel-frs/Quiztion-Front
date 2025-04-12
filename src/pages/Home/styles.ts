@@ -42,7 +42,9 @@ export const styles = StyleSheet.create({
     descricoesMateria: {
         flex: 1,
         paddingLeft: 20,
-        paddingVertical: 15
+        paddingVertical: 15,
+        height: "100%",
+        alignContent: "center"
     },
     book: {
         flex: 1,
@@ -51,8 +53,8 @@ export const styles = StyleSheet.create({
     txtMateria: {
         color: 'white',
         fontFamily: 'Baloo2-SemiBold',
+        height: 32,
         fontSize: 25,
-        marginBottom: -5
     },
     txtSerie: {
         color: '#980724',

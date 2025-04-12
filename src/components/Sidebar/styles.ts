@@ -7,23 +7,27 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: '100%',
-        zIndex: 1
+        zIndex: 9,
     },
     container: {
         position: 'absolute',
         width: '80%',
         height: '100%',
         zIndex: 10,
-        paddingTop: 110,
+        paddingTop: 50,
         display: 'flex',
         padding: 15,
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        borderEndEndRadius: 30,
+        borderEndStartRadius: 30
     },
     containerWhite: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        borderColor: '#E5E5E5'
     },
     containerDark: {
-        backgroundColor: '#202E38'
+        backgroundColor: '#202E38',
+        borderColor: '#3F4A52'
     },
     btnSidebar: {
         width: '100%',
@@ -48,7 +52,6 @@ export const styles = StyleSheet.create({
     btnSair: {
         width: '100%',
         alignItems: "center",
-        marginBottom: 15,
         borderWidth: 4,
         borderBottomWidth: 10,
         borderColor: '#C2062E',
@@ -69,5 +72,38 @@ export const styles = StyleSheet.create({
     btnSidebarDark: {
         borderColor: '#FFFFFF',
         backgroundColor: '#202E38',
+    },
+    perfil:{
+        marginBottom: 15,
+        padding: 10,
+        borderWidth: 5,
+        borderRadius: 20,
+        flexWrap: "wrap",
+        flexDirection: "row",
+        display: "flex",
+        alignItems: "center"
+    },
+    perfilWhite:{
+        borderColor: '#325874',
+        backgroundColor: '#325874',
+    },
+    perfilDark:{
+        borderColor: "#FFF",
+        backgroundColor: "#FFF",
+    },
+    imgPerfil:{
+        height: 50,
+        width: 50,
+        backgroundColor: "#3F4A52",
+        borderRadius: "100%",
+        marginRight: 10
+    },
+    txtSidebarNome: {
+        fontFamily: 'Baloo2-Bold',
+        fontSize: 20,
+        width: 190,
+    },
+    txtSidebarNomeDark: {
+        color: '#202E38'
     },
 })

@@ -23,7 +23,7 @@ export default function HeaderHome() {
                 <Text style={[isDarkMode ? styles.tionDark : styles.tion, styles.fontLogo]}>TION</Text>
             </View>
             <View style={styles.aux}>
-                <Ionicons name="menu" size={30} color={isDarkMode ? "#FFF" : "#000"} />
+                <Ionicons name="menu" size={30}/>
             </View>
         </View>
     );
