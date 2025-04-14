@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
     },
     containt: {
         padding: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 100
     },
     containerQuestion: {
         borderRadius: 20,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import QuestionModel from '../QuesionModel/QuestionModel';
 
@@ -9,13 +9,13 @@ interface Option {
 
 interface QuestionGroupProps {
   options: Option[];
+  selectedIndex: number | null;
+  onSelect: (index: number) => void;
 }
 
-const QuestionGroup: React.FC<QuestionGroupProps> = ({ options }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-
+const QuestionGroup: React.FC<QuestionGroupProps> = ({ options, selectedIndex, onSelect }) => {
   const handleSelect = (index: number, onPress: () => void) => {
-    setSelectedIndex(index);
+    onSelect(index);
     onPress();
   };
 

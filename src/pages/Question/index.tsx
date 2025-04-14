@@ -1,55 +1,123 @@
-import { View } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import Background from '../../components/Background/Background';
 import HeaderDefault from '../../components/HeaderDefault/HeaderDefault';
 import { useTheme } from '../../context/ThemeContext';
-import { Text } from 'react-native';
 import { styles } from './styles';
 import QuestionGroup from '../../components/QuestionGroup/QuestionGroup';
+import ButtonQuestion from '../../components/ButtonsQuestion/ButtonQuestion';
+import { useState } from 'react';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useQuiz } from '../../context/QuizContext';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../routes/root'; // Ajuste o caminho conforme necessário
 
-export default function Question () {
+interface Materia {
+  id: number;
+  nome: string;
+  ano: string;
+}
+
+// Defina o tipo de navegação para a tela Question
+type QuestionScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Question'>;
+
+type RouteParams = {
+  Question: {
+    materia?: Materia;
+    index: number;
+  };
+};
+
+export default function Question() {
     const { isDarkMode } = useTheme();
-
-    const options = [
-        {
-          title: 'A Corrida Espacial entre EUA e URSS.',
-          onPress: () => console.log('Opção 1'),
-        },
-        {
-          title: 'Criação da OTAN.',
-          onPress: () => console.log('Opção 2'),
-        },
-        {
-          title: 'Queda do Muro de Berlim.',
-          onPress: () => console.log('Opção 3'),
-        },
-        {
-          title: 'Revolução Francesa.',
-          onPress: () => console.log('Opção 4'),
-        },
-      ];
+    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const navigation = useNavigation<QuestionScreenNavigationProp>();
+    const route = useRoute<RouteProp<RouteParams, 'Question'>>();
+    const { questoes, addResposta } = useQuiz();
     
+    const currentIndex = route.params?.index || 0;
+    const questao = questoes[currentIndex];
+    const isLastQuestion = currentIndex === questoes.length - 1;
+
     const backgroundImage = isDarkMode 
-    ? require('../../assets/backgroundDark.png') 
-    : require('../../assets/backgroundWhite.png');
+        ? require('../../assets/backgroundDark.png') 
+        : require('../../assets/backgroundWhite.png');
 
     const backgroundColor = isDarkMode ? '#202E38' : '#FFFFFF';
 
+    const options = [
+      { 
+        title: questao?.opcaoA || '', 
+        value: 'A',
+        onPress: () => setSelectedOption('A') 
+      },
+      { 
+        title: questao?.opcaoB || '', 
+        value: 'B',
+        onPress: () => setSelectedOption('B') 
+      },
+      { 
+        title: questao?.opcaoC || '', 
+        value: 'C',
+        onPress: () => setSelectedOption('C') 
+      },
+      { 
+        title: questao?.opcaoD || '', 
+        value: 'D',
+        onPress: () => setSelectedOption('D') 
+      },
+    ];
+
+    const handleNext = () => {
+        if (selectedOption !== null && questao) {
+            const acertou = selectedOption === questao.opcaoCerta;
+            addResposta(questao.idQuestao, acertou);
+            
+            if (isLastQuestion) {
+                navigation.navigate('Results');
+            } else {
+                navigation.navigate('LoadingNext', { 
+                    index: currentIndex + 1 
+                });
+            }
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentIndex > 0) {
+            navigation.navigate('Question', { 
+                index: currentIndex - 1 
+            });
+        }
+    };
+
     return (
-        <>
         <Background backgroundImage={backgroundImage} backgroundColor={backgroundColor}>
-            <HeaderDefault />
-            <View style={styles.containt}>
-                <View style={[styles.containerQuestion, isDarkMode ? styles.containerDark : styles.containerWhite]}>
-                    <Text style={[isDarkMode ? styles.textDark : styles.textWhite, styles.textDefault]}>
-                        1 - A Guerra Fria foi um período de tensão geopolítica entre os Estados Unidos 
-                        e a União Soviética, caracterizado pela disputa entre o capitalismo e o socialismo. 
-                        Durante esse período, ocorreram vários eventos que marcaram a rivalidade entre 
-                        as duas potências. Qual dos eventos abaixo NÃO está relacionado à Guerra Fria?
-                    </Text>
-                </View>
-                <QuestionGroup options={options}/>
-            </View>
+            <HeaderDefault 
+                materia={route.params?.materia?.nome || 'Quiz'} 
+                showBackButton={true}
+            />
+            
+            <ScrollView contentContainerStyle={styles.containt}>
+              <View style={[styles.containerQuestion, isDarkMode ? styles.containerDark : styles.containerWhite]}>
+                  <Text style={[isDarkMode ? styles.textDark : styles.textWhite, styles.textDefault]}>
+                  {currentIndex + 1} - {questao?.enunciado || 'Carregando questão...'}
+                  </Text>
+              </View>
+              
+              <QuestionGroup 
+                options={options}
+                selectedIndex={options.findIndex(opt => opt.value === selectedOption)}
+                onSelect={(index) => setSelectedOption(options[index].value)}
+              />
+            </ScrollView>
+            
+            <ButtonQuestion 
+              onPressLeft={handlePrevious} 
+              onPressRight={handleNext}
+              isBlocked={selectedOption === null}
+              rightButtonText={isLastQuestion ? 'Finalizar' : 'Próxima'}
+              leftButtonText='Voltar'
+            />
         </Background>
-        </>
-    )
+    );
 }

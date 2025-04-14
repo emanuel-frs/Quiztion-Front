@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
   },
   aux: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingRight: 20
   },
   btnDark: {
     borderColor: "#3F4A52",
@@ -27,12 +28,12 @@ export const styles = StyleSheet.create({
   },
   txt: {
     color: 'white',
-    fontFamily: 'Baloo2-SemiBold',
+    fontFamily: 'Baloo2-Bold',
     fontSize: 15,
   },
   txtWhite: {
     color: '#325874',
-    fontFamily: 'Baloo2-SemiBold',
+    fontFamily: 'Baloo2-Bold',
     fontSize: 15,
   },
   circleModel: {
@@ -44,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   circleSelect: {
     borderColor: "#fff",
-    backgroundColor: "#fff",
+    backgroundColor: "#E40E3C",
   },
   circleWhite: {
     borderColor: "#BCBCBC",

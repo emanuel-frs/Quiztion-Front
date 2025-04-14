@@ -5,11 +5,17 @@ import HomeScreen from '../pages/Home';
 import LoginScreen from '../pages/Login';
 import { useAuth } from '../context/AuthContext';
 import QuestionScreen from '../pages/Question';
+import LoadingQuestions from '../pages/LoadingQuestions';
+import LoadingNext from '../pages/LoadingNext';
+import ResultsScreen from '../pages/Results';
 
 export type RootStackParamList = {
   Login: undefined;
   Home: undefined;
-  Question: undefined;
+  Question: { index: number; materia?: { id: number; nome: string; ano: string } };
+  LoadingQuestions: { materia: { idMateria: number; nome: string; ano: number } };
+  LoadingNext: { index: number };
+  Results: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -22,15 +28,30 @@ const RootNavigator = () => {
       <Stack.Navigator>
         {isLoggedIn ? (
           <>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{ headerShown: false }}
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ headerShown: false }}
             />        
-          <Stack.Screen
-            name="Question"
-            component={QuestionScreen}
-            options={{ headerShown: false }}
+            <Stack.Screen
+              name="Question"
+              component={QuestionScreen}
+              options={{ headerShown: false }}
+            />  
+            <Stack.Screen
+              name="LoadingQuestions"
+              component={LoadingQuestions}
+              options={{ headerShown: false }}
+            />  
+            <Stack.Screen
+              name="LoadingNext"
+              component={LoadingNext}
+              options={{ headerShown: false }}
+            />  
+            <Stack.Screen
+              name="Results"
+              component={ResultsScreen}
+              options={{ headerShown: false }}
             />  
           </>      
         ) : (

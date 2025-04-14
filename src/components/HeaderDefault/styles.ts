@@ -5,11 +5,8 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'center',
     },
-    quiz: {
-        color: '#E40E3C',
-    },
     fontLogo: {
-        fontSize: 35,
+        fontSize: 30,
         fontFamily: 'Baloo2-ExtraBold'
     },
     tion: {
