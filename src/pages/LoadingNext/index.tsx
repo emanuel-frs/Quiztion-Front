@@ -1,22 +1,29 @@
 import React, { useEffect } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/root';
+import { useTheme } from '../../context/ThemeContext';
+import Background from '../../components/Background/Background';
+import { styles } from './styles';
 
-// Defina o tipo para a navegação
 type LoadingNextNavigationProp = NativeStackNavigationProp<RootStackParamList, 'LoadingNext'>;
 
 export default function LoadingNext() {
-  // Use os tipos definidos
   const navigation = useNavigation<LoadingNextNavigationProp>();
   const route = useRoute<RouteProp<RootStackParamList, 'LoadingNext'>>();
+  const { isDarkMode } = useTheme();
+  
+  const backgroundImage = isDarkMode
+    ? require('../../assets/backgroundDark.png')
+    : require('../../assets/backgroundWhite.png');
+
+  const backgroundColor = isDarkMode ? '#202E38' : '#FFFFFF';
   
   const { index } = route.params;
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // Agora o TypeScript conhece os tipos de navegação
       navigation.navigate('Question', { index });
     }, 500);
 
@@ -24,8 +31,11 @@ export default function LoadingNext() {
   }, [index, navigation]);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <ActivityIndicator size="large" />
-    </View>
+    <Background backgroundImage={backgroundImage} backgroundColor={backgroundColor}>
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={isDarkMode ? '#fff' : '#325874'}/>
+        <Text style={[styles.text, isDarkMode ? styles.txtDark : styles.txtWhite]}>Carregando...</Text>
+      </View>
+    </Background>
   );
 }

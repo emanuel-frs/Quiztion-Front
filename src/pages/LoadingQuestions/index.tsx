@@ -4,6 +4,8 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { getQuestoesByMateria } from '../../services/api';
 import { useQuiz } from '../../context/QuizContext';
 import { styles } from './styles';
+import { useTheme } from '../../context/ThemeContext';
+import Background from '../../components/Background/Background';
 
 type Params = {
   params: {
@@ -24,15 +26,24 @@ export default function LoadingQuestions() {
   const route = useRoute<RouteProp<Params, 'params'>>();
   const { materia } = route.params;
   const { setQuestoes } = useQuiz();
+  const { isDarkMode } = useTheme();
+
+  const backgroundImage = isDarkMode
+    ? require('../../assets/backgroundDark.png')
+    : require('../../assets/backgroundWhite.png');
+
+  const backgroundColor = isDarkMode ? '#202E38' : '#FFFFFF';
 
   useEffect(() => {
     const fetchQuestoes = async () => {
       try {
-        console.log(materia)
         const data = await getQuestoesByMateria(materia.idMateria);
         const questoesAleatorias = embaralharArray(data);
         setQuestoes(questoesAleatorias);
-        navigation.navigate('Question' as never, { index: 0 } as never);
+        navigation.navigate('Question' as never, { 
+          index: 0, 
+          materia 
+        } as never);        
       } catch (err) {
         console.error('Erro ao carregar questões:', err);
       }
@@ -46,9 +57,11 @@ export default function LoadingQuestions() {
   };
 
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" />
-      <Text style={styles.text}>Carregando questões...</Text>
-    </View>
+    <Background backgroundImage={backgroundImage} backgroundColor={backgroundColor}>
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={isDarkMode ? '#fff' : '#325874'}/>
+        <Text style={[styles.text, isDarkMode ? styles.txtDark : styles.txtWhite]}>Carregando questões...</Text>
+      </View>
+    </Background>
   );
 }

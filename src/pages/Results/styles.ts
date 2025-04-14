@@ -3,112 +3,103 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         padding: 20,
-        paddingBottom: 100,
-    },
-    noResults: {
-        flex: 1,
-        textAlign: 'center',
-        marginTop: 50,
-        fontSize: 18,
-        color: '#000',
-    },
-    noResultsDark: {
-        color: '#FFF',
-    },
-    summaryContainer: {
-        marginBottom: 30,
-    },
-    performanceText: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: 20,
-        color: '#000',
-    },
-    performanceTextDark: {
-        color: '#FFF',
-    },
-    scoreContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    scoreCircle: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        backgroundColor: '#4CAF50',
         justifyContent: 'center',
-        alignItems: 'center',
-    },
-    scorePercentage: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#FFF',
-    },
-    scoreLabel: {
-        fontSize: 14,
-        color: '#FFF',
-    },
-    detailScores: {
-        flex: 1,
-        marginLeft: 20,
-    },
-    detailText: {
-        fontSize: 16,
-        marginBottom: 8,
-        color: '#000',
-    },
-    detailTextDark: {
-        color: '#FFF',
-    },
-    questionsList: {
-        marginTop: 20,
-    },
-    sectionTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 15,
-        color: '#000',
-    },
-    sectionTitleDark: {
-        color: '#FFF',
-    },
-    questionItem: {
-        padding: 15,
-        marginBottom: 10,
-        borderRadius: 8,
-    },
-    questionItemLight: {
-        backgroundColor: '#F5F5F5',
-    },
-    questionItemDark: {
-        backgroundColor: '#2D3843',
-    },
-    questionText: {
-        fontSize: 16,
-        marginBottom: 5,
-        color: '#000',
-    },
-    questionTextDark: {
-        color: '#FFF',
+        height: '100%',
+        paddingBottom: 150
     },
     correct: {
-        color: '#4CAF50',
+        color: '#2ECC71',
         fontWeight: 'bold',
     },
-    wrong: {
-        color: '#F44336',
+    total: {
+        color: '#16A085',
         fontWeight: 'bold',
     },
-    grade: {
-        color: '#2196F3',
-        fontWeight: 'bold',
+    grid: {
+        marginTop: 30,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: 10,
+        rowGap: 10,
+    },
+    cell: {
+        width: 70,
+        height: 70,
+        borderRadius: 20,
+        borderWidth: 4,
+        borderBottomWidth: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    cellCorrect: {
+        borderColor: '#2CCB8E',
+    },
+    cellWrong: {
+        borderColor: '#E40E3C',
+    },
+    cellText: {
+        color: '#fff',
+        fontSize: 28,
+        fontFamily: 'Baloo2-ExtraBold',
+    },
+    cellDark: {
+        backgroundColor: "#202E38"
+    },
+    cellWhite: {
+        backgroundColor: "#fff"
+    },
+    cellTextCorrect: {
+        color: "#2CCB8E"
+    },
+    cellTextWrong: {
+        color: "#E40E3C"
     },
     buttonContainer: {
-        position: 'absolute',
-        bottom: 20,
-        left: 20,
-        right: 20,
+        marginTop: 40,
+        width: '100%',
     },
+    button: {
+        width: '100%',
+        alignItems: "center",
+        marginBottom: 20,
+        borderWidth: 4,
+        borderBottomWidth: 10,
+        borderColor: '#119E68',
+        backgroundColor: '#2CCB8E',
+        height: 60,
+        borderRadius: 20,
+        justifyContent: "center",
+    },
+    btnGabaritou: {
+        borderColor: '#D103B2',
+        backgroundColor: '#FF00D9',
+    },
+    btnNormal: {
+        borderColor: '#119E68',
+        backgroundColor: '#2CCB8E',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 20,
+        fontFamily: 'Baloo2-ExtraBold',
+        textAlign: 'center',
+    },
+    text: {
+        fontSize: 20,
+        fontFamily: 'Baloo2-ExtraBold',
+        textAlign: 'center'
+    },
+    txtDark: {
+        color: '#fff'
+    },
+    txtWhite: {
+        color: "#325874"
+    },
+    gabaritou: {
+        borderColor: "#FF00D9",
+    },
+    txtGabaritou: {
+        color: "#FF00D9"
+    }
 });

@@ -5,11 +5,17 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    paddingHorizontal: 50
   },
   text: {
     marginTop: 20,
-    fontSize: 18,
-    color: '#000',
+    fontSize: 25,
+    fontFamily: 'Baloo2-ExtraBold',
   },
+  txtDark: {
+    color: '#fff'
+  },
+  txtWhite: {
+    color: "#325874"
+  }
 });

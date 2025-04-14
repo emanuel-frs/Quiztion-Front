@@ -93,7 +93,7 @@ export default function Question() {
     return (
         <Background backgroundImage={backgroundImage} backgroundColor={backgroundColor}>
             <HeaderDefault 
-                materia={route.params?.materia?.nome || 'Quiz'} 
+                materia={route.params?.materia?.nome.toUpperCase() || 'Quiz'} 
                 showBackButton={true}
             />
             
