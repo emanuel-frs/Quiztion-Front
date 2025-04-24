@@ -19,7 +19,7 @@ export default function Results() {
     const [mensagem, setMensagem] = useState<string>("");
     const [tituloMensagem, setTituloMensagem] = useState<string>("");
     const [gabaritou, setGabaritou] = useState<boolean>(false)
-    
+
     const backgroundImage = isDarkMode 
     ? require('../../assets/backgroundDark.png') 
     : require('../../assets/backgroundWhite.png');
@@ -30,29 +30,24 @@ export default function Results() {
     const acertos = Object.values(respostas).filter(acertou => acertou).length;
     
     useEffect(() => {
-        if (acertos >= 0 && acertos < 5) {
-            setTituloMensagem("NÃO DESANIME");
-        } else if (acertos >= 5 && acertos < 7) {
-            setTituloMensagem("BOA");
-        } else if (acertos >= 7 && acertos < 10) {
-            setTituloMensagem("PARABÉNS");
-        } else if (acertos === 10) {
+        if (acertos === 10) {
             setTituloMensagem("INCRÍVEL");
-            setGabaritou(true)
-        }
-
-        if (acertos === 0) {
-            setMensagem("Dessa vez, você não acertou nenhuma, mas isso faz parte do aprendizado. Cada erro é uma chance de melhorar. Continue estudando e tentando, porque você é capaz de evoluir e conquistar seus objetivos!");
-        } else if (acertos < 5) {
-            setMensagem(`Você acertou ${acertos} de 10 questões, e isso significa que há espaço para crescer. Continue estudando e praticando, porque cada erro é uma oportunidade de aprendizado. Você consegue!`);
-        } else if (acertos < 7) {
-            setMensagem(`Você acertou ${acertos} de 10 questões! Já é um ótimo começo! Continue praticando e você vai melhorar ainda mais. Você consegue!`);
-        } else if (acertos < 10) {
-            setMensagem(`Você acertou ${acertos} de 10 questões! Ótimo trabalho! Continue se dedicando, pois você está no caminho certo para melhorar ainda mais.`);
-        } else if (acertos === 10) {
             setMensagem("Você acertou 10 de 10 questões! Seu esforço e dedicação valeram a pena. Continue assim, você está arrasando!");
+            setGabaritou(true);
+        } else if (acertos >= 7) {
+            setTituloMensagem("PARABÉNS");
+            setMensagem(`Você acertou ${acertos} de 10 questões! Ótimo trabalho! Continue se dedicando, pois você está no caminho certo para melhorar ainda mais.`);
+        } else if (acertos >= 5) {
+            setTituloMensagem("BOA");
+            setMensagem(`Você acertou ${acertos} de 10 questões! Já é um ótimo começo! Continue praticando e você vai melhorar ainda mais. Você consegue!`);
+        } else if (acertos > 0) {
+            setTituloMensagem("NÃO DESANIME");
+            setMensagem(`Você acertou ${acertos} de 10 questões, e isso significa que há espaço para crescer. Continue estudando e praticando, porque cada erro é uma oportunidade de aprendizado. Você consegue!`);
+        } else {
+            setTituloMensagem("NÃO DESANIME");
+            setMensagem("Dessa vez, você não acertou nenhuma, mas isso faz parte do aprendizado. Cada erro é uma chance de melhorar. Continue estudando e tentando, porque você é capaz de evoluir e conquistar seus objetivos!");
         }
-    }, [acertos]);
+    }, [acertos]);    
 
     const handleRestart = () => {
         resetQuiz();

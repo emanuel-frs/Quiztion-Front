@@ -9,6 +9,7 @@ import Button from "../../components/Button/Button";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { ScrollView } from "react-native-gesture-handler";
 import { getMaterias } from "../../services/api";
+import Timer from "../../components/HeaderTimer/HeaderTimer";
 
 interface Materia {
   id: number;
@@ -72,6 +73,12 @@ export default function Home() {
       <Sidebar/>
       <Background backgroundImage={backgroundImage} backgroundColor={backgroundColor}>
         <HeaderHome />
+          {/* <View style={{ flex: 1, justifyContent: 'center' }}>
+            <Timer
+              duration={45}
+              onFinish={() => {}}
+            />
+          </View> */}
         <ScrollView contentContainerStyle={styles.containt}>
           <Button
             title="MODO DESAFIO"

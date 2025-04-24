@@ -33,7 +33,19 @@ export const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         paddingHorizontal: 15,
-        zIndex: 1
+        zIndex: 1,
+    },
+    containerNone: {
+        paddingTop: 30,
+        padding: 5,
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.8,
+        shadowRadius: 10,
+        elevation: 15,
+        flexDirection: "row",
+        justifyContent: 'center',
+        paddingHorizontal: 15,
+        zIndex: 1,
     },
     menu: {
         justifyContent: 'center',
@@ -43,5 +55,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         opacity: 0
+    },
+    none: {
+        display: "none"
     }
 })

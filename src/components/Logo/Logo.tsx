@@ -7,7 +7,7 @@ export default function Logo () {
 
     return (
         <View style={styles.logo}>
-            <Text style={[styles.quiz, styles.fontLogo]}>QUIS</Text>
+            <Text style={[styles.quiz, styles.fontLogo]}>QUIZ</Text>
             <Text style={[isDarkMode? styles.tionDark : styles.tion, styles.fontLogo]}>TION</Text>
         </View>
     )
